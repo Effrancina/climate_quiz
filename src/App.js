@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import GameLogic from "./containers/GameLogic";
 import AboutScreen from "./containers/AboutScreen";
@@ -18,12 +18,12 @@ function App() {
   return (
     <Main>
       <GlobalStyle background={background} />
-      <Router>
+      <HashRouter basename="/">
         <Routes>
-          <Route path="/climate_quiz" element={< GameLogic updateBackground={updateBackground} />} />
+          <Route exact path="/" element={< GameLogic updateBackground={updateBackground} />} />
           <Route path="/about" element={< AboutScreen />} />
         </Routes>
-      </Router>
+      </HashRouter>
     </Main>
   )
 }
@@ -37,7 +37,6 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-
     .react-responsive-modal-modal {
       width: 100%;
       height: 100%;
@@ -46,11 +45,9 @@ const GlobalStyle = createGlobalStyle`
       background: rgba(0, 0, 0, 0.9);
       color: white;
     }
-
     .react-responsive-modal-closeButton svg {
       fill: white;
     }
-
     .react-responsive-modal-overlay,
     .react-responsive-modal-container,
     .react-responsive-modal-modal {
